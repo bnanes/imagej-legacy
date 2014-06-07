@@ -68,7 +68,7 @@ public class ImageJ2Options extends OptionsPlugin
 	@Parameter(label = "Display ImageJ2 welcome message", callback = "help")
 	private Button help;
 
-	@Parameter()
+	@Parameter
 	private DefaultLegacyService legacyService;
 
 	@Parameter(required = false)
