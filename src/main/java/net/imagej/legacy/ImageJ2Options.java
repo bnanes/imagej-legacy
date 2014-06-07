@@ -36,6 +36,8 @@ import org.scijava.options.OptionsPlugin;
 import org.scijava.plugin.Menu;
 import org.scijava.plugin.Parameter;
 import org.scijava.plugin.Plugin;
+import org.scijava.welcome.WelcomeService;
+import org.scijava.widget.Button;
 
 /**
  * Allows the setting and persisting of options relevant to ImageJ2, in ImageJ1.
@@ -63,12 +65,24 @@ public class ImageJ2Options extends OptionsPlugin
 	@Parameter(label = "Use SCIFIO when opening files")
 	private Boolean useSCIFIO = true;
 
+	@Parameter(label = "Display ImageJ2 welcome message", callback = "help")
+	private Button help;
+
 	@Parameter()
 	private DefaultLegacyService legacyService;
+
+	@Parameter(required = false)
+	private WelcomeService welcomeService;
 
 	// -- Option accessors --
 
 	public Boolean isUseSCIFIO() {
 		return useSCIFIO;
+	}
+
+	private void help() {
+		if (welcomeService != null) {
+			welcomeService.displayWelcome();
+		}
 	}
 }
